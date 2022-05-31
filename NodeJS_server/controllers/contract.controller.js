@@ -3,13 +3,13 @@ const db = require('../db')
 class ContractController {
   async createContract(req, res) {
     try {
-      const { date, number, content } = req.body
+      const { date, number, title } = req.body
       console.log('CREATE:')
       console.log(req.body)
       const newContract = await db.query(
         `INSERT INTO "contract" 
-    (date, number, content) VALUES ($1, $2, $3) RETURNING *`,
-        [date, number, content],
+    (date, number, title) VALUES ($1, $2, $3) RETURNING *`,
+        [date, number, title],
       )
       res.json(newContract.rows[0])
     } catch (error) {
@@ -47,13 +47,13 @@ class ContractController {
 
   async updateContract(req, res) {
     try {
-      const { id, date, number, content } = req.body
+      const { id, date, number, title } = req.body
       console.log('UPDATE:')
       console.log(req.body)
       const contract = await db.query(
-        `UPDATE "contract" SET date = $2, number = $3, content = $4, 
+        `UPDATE "contract" SET date = $2, number = $3, title = $4, 
         WHERE id = $1 RETURNING *`,
-        [id, date, number, content],
+        [id, date, number, title],
       )
       res.json(contract.rows[0])
     } catch (error) {
