@@ -51,7 +51,7 @@ class ContractController {
       console.log('UPDATE:')
       console.log(req.body)
       const contract = await db.query(
-        `UPDATE "contract" SET date = $2, number = $3, title = $4, 
+        `UPDATE "contract" SET date = $2, number = $3, title = $4 
         WHERE id = $1 RETURNING *`,
         [id, date, number, title],
       )
